@@ -2,26 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+:root{
+    --swiper-navigation-size:30px !important;
+    --swiper-theme-color: #F8c8DC !important;
+    color:#2b2839
+}
+[data-theme='dark'] {
+  --background: black;
+  --foreground: white;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+body{
+    margin: auto;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.swiper-button-next{
+    color:white !important;
+    background-color: #F8C8DC;
+    padding:30px;
+    border-radius: 100%;
 }
+.swiper-button-prev{
+    color:white !important;
+    background-color: #F8C8DC;
+    padding:30px;
+    border-radius: 100%;
+}
+.swiper-pagination{
+    
+}
+
+.ant-pagination .ant-pagination-options{
+  display: none !important;
+}
+
+
+
