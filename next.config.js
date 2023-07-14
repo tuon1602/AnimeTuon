@@ -2,6 +2,9 @@
 const nextConfig = {
     images:{
         domains:['gogocdn.net']
+    },
+    experimental:{
+        serverActions:true
     }
 }
 

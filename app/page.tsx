@@ -10,6 +10,7 @@ async function getAiringData() {
     next: {
       revalidate: 300,
     },
+    cache:"no-store"
   });
   if (!res.ok) {
     throw new Error("failed to fetch top-airing");
@@ -21,6 +22,7 @@ async function getRecentAnimeData() {
     next: {
       revalidate: 300,
     },
+    cache:"no-store"
   });
   if (!res.ok) {
     throw new Error("failed to fetch top-airing");
@@ -32,7 +34,7 @@ export default async function Home() {
   const topAiringData = await getAiringData();
   const recentAnimeData = await getRecentAnimeData();
   const swiperData = topAiringData.results;
-  console.log(swiperData);
+  // console.log(swiperData);
   return (
     <main className="space-y-20 z-0">
       {/* <Swipper data={swiperData} /> */}

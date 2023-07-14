@@ -1,5 +1,5 @@
 "use client";
-import { signIn, signOut ,useSession} from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import React, { use } from "react";
@@ -20,7 +20,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 const RegisterForm = () => {
-    const session = useSession()
+  const session = useSession();
   const router = useRouter();
   if (session.status === "authenticated") {
     router?.push("/");

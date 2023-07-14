@@ -19,10 +19,10 @@ export async function GET(req: Request) {
             })
             return NextResponse.json({ status:200,commentDataByAnimeId});
         }
-        if(animeId && chapterId){
+        else if(chapterId){
             const commentData = await prisma.comment.findMany({
                 where:{
-                    animeId : animeId,
+                    // animeId : animeId,
                     animeChapterId: chapterId,
                 },
                 include:{

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
+import Comment from "@/app/components/Comments/Comment";
 
 const ChapterId = () => {
   const params = useParams();
@@ -121,6 +122,9 @@ const ChapterId = () => {
             ))}
           </CardContent>
         </Card>
+      </div>
+      <div>
+        <Comment animeId={params.id} animeChapterId={params.chapterid}/>
       </div>
     </div>
   );

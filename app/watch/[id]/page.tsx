@@ -3,6 +3,7 @@ import Image from "next/image";
 import DetailsButton from "@/app/components/buttons/DetailsButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Comment from "@/app/components/Comments/Comment";
 
 const AnimeDetail = async ({ params }: { params: { id: string } }) => {
   const resAnimeDetail = await fetch(
@@ -56,6 +57,9 @@ const AnimeDetail = async ({ params }: { params: { id: string } }) => {
       </div>
       <div className="mt-8">
             <p>Description: {dataAnimeDetail?.description}</p>
+      </div>
+      <div>
+        <Comment animeId={params.id}/>
       </div>
     </div>
   );
