@@ -4,13 +4,33 @@ import DetailsButton from "@/app/components/buttons/DetailsButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Comment from "@/app/components/Comments/Comment";
+import { notFound } from "next/navigation";
+
+const getAnimeDetail =async  (id:string) =>{
+  try {
+    const resAnimeDetail = await fetch(
+      `${process.env.ANIME_API}/info/${id}`
+    );
+    return  await resAnimeDetail.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 const AnimeDetail = async ({ params }: { params: { id: string } }) => {
-  const resAnimeDetail = await fetch(
-    `${process.env.ANIME_API}/info/${params.id}`
-  );
-  const dataAnimeDetail = await resAnimeDetail.json();
-    console.log(dataAnimeDetail.episodes[0].id);
+  const dataAnimeDetail = await getAnimeDetail(params.id)
+  if(!dataAnimeDetail){
+    notFound()
+  }
+  // try {
+  //   const resAnimeDetail = await fetch(
+  //     `${process.env.ANIME_API}/info/${params.id}`
+  //   );
+  //   const dataAnimeDetail = await resAnimeDetail.json();
+  // } catch (error) {
+    
+  // }
+
   return (
     <div className="min-h-[80vh]">
       <div className="flex gap-5">
@@ -48,18 +68,27 @@ const AnimeDetail = async ({ params }: { params: { id: string } }) => {
             )} */}
             <DetailsButton
               name="Latest Episode"
-              episode={dataAnimeDetail?.episodes.length>=2 ?dataAnimeDetail?.episodes.slice(-2):dataAnimeDetail?.episodes}
+              episode={
+                dataAnimeDetail?.episodes.length >= 2
+                  ? dataAnimeDetail?.episodes.slice(-2)
+                  : dataAnimeDetail?.episodes
+              }
               animeId={params.id}
             />
-            <Link href={`/watch/${params.id}/${dataAnimeDetail.episodes[0].id}`} className="w-[150px]"><Button className="bg-lightyellow w-full">Watch now</Button></Link>
+            <Link
+              href={`/watch/${params.id}/${dataAnimeDetail.episodes[0].id}`}
+              className="w-[150px]"
+            >
+              <Button className="bg-lightyellow w-full hover:opacity-50 ease-in-out transition-all">Watch now</Button>
+            </Link>
           </div>
         </div>
       </div>
       <div className="mt-8">
-            <p>Description: {dataAnimeDetail?.description}</p>
+        <p>Description: {dataAnimeDetail?.description}</p>
       </div>
       <div>
-        <Comment animeId={params.id}/>
+        <Comment animeId={params.id} />
       </div>
     </div>
   );

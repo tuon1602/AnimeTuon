@@ -82,7 +82,7 @@ const Search = () => {
         <div
           className={
             focus
-              ? `absolute w-[500px] max-h-[500px] bg-lightyellow z-60 top-full -mt-4 overflow-auto`
+              ? `absolute w-[500px] max-h-[500px] bg-lightyellow z-60 top-full -mt-4 overflow-auto duration-300 ease-in-out transition-all`
               : `hidden`
           }
           onMouseDown={(e) => e.preventDefault()}

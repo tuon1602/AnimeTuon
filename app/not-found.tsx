@@ -1,9 +1,10 @@
 import Link from 'next/link'
+import NotFound from './components/NotFound/NotFound'
  
-export default function NotFound() {
+export default function NotFoundRoot() {
   return (
     <div>
-      <h2>Something wrong, please try again later</h2>
+      <NotFound/>
     </div>
   )
 }

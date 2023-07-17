@@ -30,7 +30,7 @@ const AnimeCards: React.FC<recentAnimeDataProps> = ({ data }) => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <Card className="w-[250px] rounded-xl flex flex-col gap-5 bg-pinkpastel relative cursor-pointer drop-shadow-xl transition duration-300 ease-in-out border-none">
+                  <Card className="w-[250px] rounded-xl flex flex-col gap-5 bg-pinkpastel relative cursor-pointer drop-shadow-xl transition duration-300 ease-in-out border-none hover:opacity-50">
                     <CardHeader className="relative h-[300px]">
                       <Image
                         src={item.image}

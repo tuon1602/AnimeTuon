@@ -33,16 +33,24 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
     try {
       if (animeChapterId) {
         const res = await fetch(`/api/comment?chapterId=${animeChapterId}`, {
-          cache: "no-store",
+          next: {
+            revalidate: 300,
+          },
         });
         const data = await res.json();
         setCommentDataByChapterId(data.commentData);
       } else {
         const res = await fetch(`/api/comment?animeId=${animeId}`, {
-          cache: "no-store",
+          next: {
+            revalidate: 300,
+          },
         });
         const data = await res.json();
-        setCommentData(data.commentDataByAnimeId.filter((comment:any)=>comment.animeChapterId === null));
+        setCommentData(
+          data.commentDataByAnimeId.filter(
+            (comment: any) => comment.animeChapterId === null
+          )
+        );
       }
     } catch (error) {
       console.error(error);

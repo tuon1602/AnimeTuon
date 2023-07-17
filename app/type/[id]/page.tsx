@@ -24,7 +24,9 @@ const TypeName = () => {
               const res = await fetch(
                 `${process.env.NEXT_PUBLIC_ANIME_API}/top-airing?page=${eachPage}`,
                 {
-                  cache: "no-cache",
+                  next:{
+                    revalidate:500
+                  }
                 }
               );
               const data = await res.json();
@@ -39,7 +41,9 @@ const TypeName = () => {
               const res = await fetch(
                 `${process.env.NEXT_PUBLIC_ANIME_API}/recent-episodes?page=${eachPage}`,
                 {
-                  cache: "no-store",
+                  next:{
+                    revalidate:500
+                  }
                 }
               );
               const data = await res.json();
@@ -67,7 +71,7 @@ const TypeName = () => {
             <AnimeCards/>
         ))} */}
         {loading ? (
-          <Skeleton className="w-[100px] h-[20px] rounded-full" />
+          <p>Loading....</p>
         ) : (
           <AnimeCards data={getAllData} />
         )}
