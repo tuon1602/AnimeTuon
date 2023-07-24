@@ -91,6 +91,7 @@ const Search = () => {
             <div className="flex flex-col gap-2">
               {dataAfterSearch.slice(0, 10).map((item: any, index: any) => (
                 <SmallCardSearch
+                key={index}
                   image={item.image}
                   title={item.title}
                   id={item.id}

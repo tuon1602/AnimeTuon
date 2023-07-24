@@ -36,7 +36,7 @@ const Swipper: React.FC<swiperProps> = ({ data }) => {
         modules={[Autoplay, Pagination, Navigation]}
       >
         {data?.map((item: any, index: any) => (
-          <SwiperSlide>
+          <SwiperSlide key={index}>
             <div className="relative w-[300px] h-[400px]">
               <Image
                 src={item.image}

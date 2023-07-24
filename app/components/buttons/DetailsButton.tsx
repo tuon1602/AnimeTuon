@@ -19,11 +19,12 @@ const DetailsButton = (props: DetailsName) => {
       </Badge>
       <p>{props.data}</p>
       {props.genres?.map((item,index)=>(
-        <p>{item}</p>
+        <p key={index}>{item}</p>
       ))}
       <div className="flex flex-wrap gap-2">
         {props.episode?.map((item: any, index: any) => (
           <Link
+          key={index}
             href={`/watch/${props.animeId}/${item.id}`}
             className="px-4 bg-pinkpastel hover:opacity-75 rounded-lg"
           >

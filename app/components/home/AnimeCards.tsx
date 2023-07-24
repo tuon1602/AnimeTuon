@@ -26,7 +26,7 @@ const AnimeCards: React.FC<recentAnimeDataProps> = ({ data }) => {
     <>
       <div className="flex flex-wrap gap-5 justify-center">
         {data?.map((item: any, index: string | number) => (
-          <Link href={`/watch/${item.id}`}>
+          <Link href={`/watch/${item.id}`} key={index}>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>

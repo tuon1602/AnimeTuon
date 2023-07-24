@@ -9,8 +9,8 @@ const TypeName = () => {
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const searchParams = useSearchParams();
-  console.log(params.id);
-  console.log(searchParams.get("nameType"));
+  // console.log(params.id);
+  // console.log(searchParams.get("nameType"));
 
   const pageNumberToFetch = 15;
   useEffect(() => {

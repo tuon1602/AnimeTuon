@@ -1,0 +1,122 @@
+{
+    "category": [
+      {
+        "id": "action",
+        "name": "Action"
+      },
+      {
+        "id": "adventure",
+        "name": "Adventure"
+      },
+      {
+        "id": "comedy",
+        "name": "Comedy"
+      },
+      {
+        "id": "drama",
+        "name": "Drama"
+      },
+      {
+        "id": "fantasy",
+        "name": "Fantasy"
+      },
+      {
+        "id": "horror",
+        "name": "Horror"
+      },
+      {
+        "id": "mystery",
+        "name": "Mystery"
+      },
+      {
+        "id": "romance",
+        "name": "Romance"
+      },
+      {
+        "id": "school",
+        "name": "School"
+      },
+      {
+        "id": "seinen",
+        "name": "Seinen"
+      },
+      {
+        "id": "shounen",
+        "name": "Shounen"
+      },
+      {
+        "id": "shoujo",
+        "name": "Shoujo"
+      },
+      {
+        "id": "supernatural",
+        "name": "Supernatural"
+      },
+      {
+        "id": "isekai",
+        "name": "Isekai"
+      },
+      {
+        "id": "ecchi",
+        "name": "Ecchi"
+      },
+      {
+        "id": "historical",
+        "name": "Historical"
+      },
+      {
+        "id": "harem",
+        "name": "Harem"
+      },
+      {
+        "id": "super-power",
+        "name": "Super Power"
+      },
+      {
+        "id": "reincarnation",
+        "name": "Reincarnation"
+      },
+      {
+        "id": "survival",
+        "name": "Survival"
+      },
+      {
+        "id": "adult-cast",
+        "name": "Adult Cast"
+      },
+      {
+        "id": "romantic-subtext",
+        "name": "Romantic Subtext"
+      },
+      {
+        "id":"psychological",
+        "name":"Psychological"
+      },
+      {
+        "id":"police",
+        "name":"Police"
+      },
+      {
+        "id":"sci-fi",
+        "name":"Sci-Fi"
+      },
+      {
+        "id":"reincarnation",
+        "name":"Reincarnation"
+      },
+      {
+        "id":"Slice of Life",
+        "name":"Slice of Life"
+      },
+      {
+        "id":"Magic",
+        "name":"Magic"
+      },
+      {
+        "id":"game",
+        "name":"Game"
+      }
+
+    ]
+  }
+  

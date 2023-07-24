@@ -6,7 +6,7 @@ import Link from 'next/link'
 import ImageNotFound from "@/public/404.png"
 const NotFound = () => {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center bg-lightgreen">
     <div className="m-auto">
       <div className="flex flex-col gap-2">
         <Image src={ImageNotFound} width={500} height={500} alt="NotFound" />

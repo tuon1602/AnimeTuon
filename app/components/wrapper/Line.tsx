@@ -7,7 +7,6 @@ interface LineProps {
 }
 
 const Line: React.FC<LineProps> = ({ name }) => {
-  console.log(name);
   return (
     <div>
       <div className="flex justify-between mb-2">

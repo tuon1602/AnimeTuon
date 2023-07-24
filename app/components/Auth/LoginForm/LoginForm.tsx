@@ -51,7 +51,6 @@ const LoginForm = () => {
           try {
             signIn("credentials", { email, password });
           } catch (error: any) {
-            router?.push("/login");
             toast.error(error.message);
           }
         }}

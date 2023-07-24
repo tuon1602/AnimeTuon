@@ -17,7 +17,10 @@ export default function Error({
 
   return (
     <>
-        <NotFound/>
+      <div className="bg-lightgreen">
+        {" "}
+        <NotFound />
+      </div>
     </>
   );
 }

@@ -9,7 +9,11 @@ import { notFound } from "next/navigation";
 const getAnimeDetail =async  (id:string) =>{
   try {
     const resAnimeDetail = await fetch(
-      `${process.env.ANIME_API}/info/${id}`
+      `${process.env.ANIME_API}/info/${id}`,{
+        next:{
+          revalidate:3600
+        }
+      }
     );
     return  await resAnimeDetail.json();
   } catch (error) {

@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "./components/theme/theme-provider";
 import { Suspense } from "react";
 import AuthProviders from "./components/AuthProviders/AuthProviders";
+import Filter from "./components/Filter/Filter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,9 @@ export default function RootLayout({
                 <div className="mt-24 w-full">
                   <Header />
                 </div>
-
+                {/* <div className="my-5 bg-pinkpastel">
+                  <Filter/>
+                </div> */}
                 {children}
 
                 {/* <Footer /> */}

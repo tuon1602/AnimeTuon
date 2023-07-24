@@ -11,7 +11,6 @@ interface PlayerProps {
 }
 
 const Player = (props: PlayerProps) => {
-  console.log(props);
   return (
     <>
       {/* <ReactPlayer

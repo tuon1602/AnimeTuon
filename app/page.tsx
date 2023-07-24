@@ -7,10 +7,7 @@ import Line from "./components/wrapper/Line";
 
 async function getAiringData() {
   const res = await fetch(`${process.env.ANIME_API}/top-airing`, {
-    next: {
-      revalidate: 300,
-    },
-    cache:"no-store"
+   cache:"no-cache"
   });
   if (!res.ok) {
     throw new Error("failed to fetch top-airing");
@@ -19,10 +16,8 @@ async function getAiringData() {
 }
 async function getRecentAnimeData() {
   const res = await fetch(`${process.env.ANIME_API}/recent-episodes`, {
-    next: {
-      revalidate: 300,
-    },
-    cache:"no-store"
+    cache:"no-cache"
+
   });
   if (!res.ok) {
     throw new Error("failed to fetch top-airing");
@@ -33,19 +28,18 @@ export default async function Home() {
 
   const topAiringData = await getAiringData();
   const recentAnimeData = await getRecentAnimeData();
-  const swiperData = topAiringData.results;
   // console.log(swiperData);
   return (
     <main className="space-y-20 z-0">
       {/* <Swipper data={swiperData} /> */}
       <div className="space-y-4">
         <Line name="Most Popular" />
-        <AnimeCards data={swiperData} />
+        <AnimeCards data={topAiringData.results.slice(0,5)} />
       </div>
       {/* <AnimeCards data={swiperData} /> */}
       <div className="space-y-4">
         <Line name="Recent Release" />
-        <AnimeCards data={recentAnimeData.results} />
+        <AnimeCards data={recentAnimeData.results.slice(0,10)} />
       </div>
     </main>
   );

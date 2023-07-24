@@ -14,10 +14,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
 import Comment from "@/app/components/Comments/Comment";
+import useSWR from "swr"
+
+
 
 const ChapterId = () => {
   const params = useParams();
-  console.log(params);
+  // console.log(params);
   const [serverDataState, setServerDataState] = useState([]);
   const [titleData, setTitleData] = useState("");
   const [serverURLState, setServerURLState] = useState("");
@@ -38,12 +41,7 @@ const ChapterId = () => {
   const fetchTitleData = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_ANIME_API}/info/${params.id}`,
-        {
-          next: {
-            revalidate: 3600,
-          },
-        }
+        `${process.env.NEXT_PUBLIC_ANIME_API}/info/${params.id}`
       );
       const getTitleData = await res.json();
       console.log(getTitleData);
@@ -90,11 +88,12 @@ const ChapterId = () => {
         <Card className="max-w-[400px]">
           <CardHeader>Choose your server</CardHeader>
           <CardDescription className="text-gray pl-6 mb-2">
-            If your anime coudn't not run, try some servers
+            {`If your anime could not run, try some servers`}
           </CardDescription>
           <CardContent className="flex flex-wrap gap-2">
             {serverDataState?.map((item: any, index: any) => (
               <Button
+              key={index}
                 variant="default"
                 className="bg-pinkpastel"
                 onClick={() => handleGetUrl(item.url)}
@@ -108,7 +107,7 @@ const ChapterId = () => {
           <CardHeader>Choose your chapter</CardHeader>
           <CardContent className="flex flex-wrap gap-2">
             {chapters?.map((item: any, index: any) => (
-              <Link href={`/watch/${params.id}/${item.id}`}>
+              <Link href={`/watch/${params.id}/${item.id}`} key={index}>
                 <p
                   className={
                     params.chapterid === item.id
