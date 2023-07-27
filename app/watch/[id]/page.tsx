@@ -11,7 +11,7 @@ const getAnimeDetail =async  (id:string) =>{
     const resAnimeDetail = await fetch(
       `${process.env.ANIME_API}/info/${id}`,{
         next:{
-          revalidate:3600
+          revalidate:300
         }
       }
     );

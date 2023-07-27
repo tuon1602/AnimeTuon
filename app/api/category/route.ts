@@ -20,7 +20,7 @@ export async function GET(req: Request){
             // allData.push(...rawData.results)
         }
         else if(category && !startPage && !endPage){
-            for(let pageNumber = 1; pageNumber <= 50; pageNumber++){
+            for(let pageNumber = 1; pageNumber <= 10; pageNumber++){
                 const res = await fetch(`${process.env.ANIME_API}/top-airing?page=${pageNumber}`)
                 const rawData = await res.json()
                 allData.push(...rawData.results.filter((anime:any)=>anime.genres.includes(category)))

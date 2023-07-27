@@ -7,7 +7,9 @@ import Line from "./components/wrapper/Line";
 
 async function getAiringData() {
   const res = await fetch(`${process.env.ANIME_API}/top-airing`, {
-   cache:"no-cache"
+   next:{
+    revalidate: 300
+   }
   });
   if (!res.ok) {
     throw new Error("failed to fetch top-airing");
@@ -16,7 +18,9 @@ async function getAiringData() {
 }
 async function getRecentAnimeData() {
   const res = await fetch(`${process.env.ANIME_API}/recent-episodes`, {
-    cache:"no-cache"
+    next:{
+      revalidate: 300
+     }
 
   });
   if (!res.ok) {

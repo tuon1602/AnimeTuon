@@ -14,10 +14,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useRouter } from "next/navigation";
 
 const LoginComPonent = () => {
   const session = useSession();
-  console.log(session.data?.user);
+  // console.log(session.data?.user);
+  const router = useRouter();
   return (
     <div>
       {session.status === "authenticated" ? (
@@ -38,7 +40,7 @@ const LoginComPonent = () => {
               Hi {session?.data?.user?.name}
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem onClick={()=>router.push('/profile')} className="cursor-pointer">Profile</DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => signOut()}
               className="cursor-pointer"

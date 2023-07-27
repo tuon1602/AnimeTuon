@@ -61,7 +61,7 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
     try {
       const data = {
         content: values.content,
-        // starValue: starValue,
+        starValue: starValue,
         animeId,
         animeChapterId: animeChapterId || null,
         userEmail: session?.data?.user?.email,
@@ -89,6 +89,7 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
   useEffect(() => {
     getCommentData();
   },[animeId,animeChapterId]);
+  console.log(commentData)
   return (
     <div className="shadow-lg w-full min-h-[10vh] mt-10">
       <ToastContainer />

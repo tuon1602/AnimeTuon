@@ -6,6 +6,7 @@ import { ThemeProvider } from "./components/theme/theme-provider";
 import { Suspense } from "react";
 import AuthProviders from "./components/AuthProviders/AuthProviders";
 import Filter from "./components/Filter/Filter";
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +41,7 @@ export default function RootLayout({
             </div>
           </ThemeProvider>
         </AuthProviders>
+        <Toaster />
       </body>
     </html>
   );
