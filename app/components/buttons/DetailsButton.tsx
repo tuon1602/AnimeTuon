@@ -14,12 +14,12 @@ const DetailsButton = (props: DetailsName) => {
   // console.log(props.genres)
   return (
     <div className="flex gap-2 flex-wrap">
-      <Badge variant="outline" className="bg-pinkpastel text-center">
+      <Badge variant="outline" className="bg-pinkpastel text-center ">
         {props.name}
       </Badge>
-      <p>{props.data}</p>
+      <p className="dark:text-lightWhite">{props.data}</p>
       {props.genres?.map((item,index)=>(
-        <p key={index}>{item}</p>
+        <Link href={`/category/${item}`} key={index} className="dark:text-lightWhite">{item}</Link>
       ))}
       <div className="flex flex-wrap gap-2">
         {props.episode?.map((item: any, index: any) => (

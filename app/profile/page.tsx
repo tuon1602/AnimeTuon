@@ -1,18 +1,46 @@
-import React from 'react'
-import { getServerSession } from 'next-auth'
-import { options } from '../api/auth/[...nextauth]/options'
-import { redirect } from 'next/navigation'
+import React from "react";
+import { getServerSession } from "next-auth";
+import { options } from "../api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import InputAvatarButton from "../components/buttons/InputAvatarButton";
 
-const ProfilePage = async  () => {
-    const session = await getServerSession(options)
-    if(!session){
-        redirect("/login")
+async function getUserDetail() {
+  const session = await getServerSession(options);
+  if (session) {
+    const res = await fetch(
+      `${process.env.API_URL}/user?email=${session?.user?.email}`,{
+      cache:"no-store"
+      }
+    );
+    if (!res.ok) {
+      throw new Error("Could not fetch user");
     }
-  return (
-    <div className='min-h-[80vh]'>
-        wtf
-    </div>
-  )
+    return res.json();
+  }
 }
 
-export default ProfilePage
+const ProfilePage = async () => {
+  const userDetail = await getUserDetail();
+  const session = await getServerSession(options);
+  if (!session) {
+    redirect("/login");
+  }
+
+  return (
+    <div className="min-h-[80vh]">
+      <div className="flex flex-col justify-center items-center gap-2">
+        <h1 className="text-4xl">
+          <span className="opacity-50">Hello</span> {session?.user?.name}
+        </h1>
+        <div>
+          <InputAvatarButton avatarUrl={userDetail?.data?.avatar} userEmail={userDetail?.data?.email}/>
+        </div>
+        <p>We hope u hav an good anime experience here! :b</p>
+      </div>
+    </div>
+  );
+};
+export default ProfilePage;

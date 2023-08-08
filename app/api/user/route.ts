@@ -24,7 +24,8 @@ export async function GET(req: Request){
                     email: email
                 },
                 include:{
-                    comments:true
+                    comments:true,
+                    likes:true
                 },
             })
             return NextResponse.json({status:200,data})

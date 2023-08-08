@@ -18,7 +18,6 @@ import { useRouter } from "next/navigation";
 
 const LoginComPonent = () => {
   const session = useSession();
-  // console.log(session.data?.user);
   const router = useRouter();
   return (
     <div>

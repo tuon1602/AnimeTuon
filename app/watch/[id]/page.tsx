@@ -5,26 +5,32 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Comment from "@/app/components/Comments/Comment";
 import { notFound } from "next/navigation";
+import { Toggle } from "@/components/ui/toggle";
+// import { Heart } from "lucide-react";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import HeartFunc from "@/app/components/HeatComponent/Heart";
 
-const getAnimeDetail =async  (id:string) =>{
+const getAnimeDetail = async (id: string) => {
   try {
-    const resAnimeDetail = await fetch(
-      `${process.env.ANIME_API}/info/${id}`,{
-        next:{
-          revalidate:300
-        }
-      }
-    );
-    return  await resAnimeDetail.json();
+    const resAnimeDetail = await fetch(`${process.env.ANIME_API}/info/${id}`, {
+      next: {
+        revalidate: 300,
+      },
+    });
+    return await resAnimeDetail.json();
   } catch (error) {
     console.error(error);
   }
-}
+};
+
+
 
 const AnimeDetail = async ({ params }: { params: { id: string } }) => {
-  const dataAnimeDetail = await getAnimeDetail(params.id)
-  if(!dataAnimeDetail){
-    notFound()
+  const dataAnimeDetail = await getAnimeDetail(params.id);
+  // const dataLikeDetail = await getLikeDetail(params.id)
+  if (!dataAnimeDetail) {
+    notFound();
   }
   // try {
   //   const resAnimeDetail = await fetch(
@@ -32,7 +38,7 @@ const AnimeDetail = async ({ params }: { params: { id: string } }) => {
   //   );
   //   const dataAnimeDetail = await resAnimeDetail.json();
   // } catch (error) {
-    
+
   // }
 
   return (
@@ -47,8 +53,8 @@ const AnimeDetail = async ({ params }: { params: { id: string } }) => {
           />
         </div>
         <div className="">
-          <p className="tracking-wider text-xl">{dataAnimeDetail?.title}</p>
-          <p className="text-sm text-gray">{dataAnimeDetail?.otherName}</p>
+          <p className="tracking-wider text-xl dark:text-lightWhite">{dataAnimeDetail?.title}</p>
+          <p className="text-sm text-gray dark:text-lightWhite">{dataAnimeDetail?.otherName}</p>
           <div className="flex flex-col gap-2 mt-2 flex-wrap">
             <DetailsButton name="Category" genres={dataAnimeDetail?.genres} />
             <DetailsButton name="Released Date" data={dataAnimeDetail?.type} />
@@ -79,17 +85,20 @@ const AnimeDetail = async ({ params }: { params: { id: string } }) => {
               }
               animeId={params.id}
             />
+          <HeartFunc animeId={params.id} animeUrl={dataAnimeDetail?.image} animeName={dataAnimeDetail?.title}/>
             <Link
               href={`/watch/${params.id}/${dataAnimeDetail.episodes[0].id}`}
               className="w-[150px]"
             >
-              <Button className="bg-lightyellow w-full hover:opacity-50 ease-in-out transition-all">Watch now</Button>
+              <Button className="bg-lightyellow w-full hover:opacity-50 ease-in-out transition-all">
+                Watch now
+              </Button>
             </Link>
           </div>
         </div>
       </div>
       <div className="mt-8">
-        <p>Description: {dataAnimeDetail?.description}</p>
+        <p className="dark:text-lightWhite">Description: {dataAnimeDetail?.description}</p>
       </div>
       <div>
         <Comment animeId={params.id} />

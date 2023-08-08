@@ -40,6 +40,7 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const data = await req.json();
+    console.log(data)
     if (data) {
       const comment = await prisma.comment.create({ data: data });
       return NextResponse.json({ status:200,comment });

@@ -24,6 +24,7 @@ const LoginForm = () => {
   const errorSearch = searchParams.get("error");
 
   const session = useSession();
+  console.log(session.status)
   const router = useRouter();
   if (session.status === "authenticated") {
     router?.push("/");
@@ -84,7 +85,7 @@ const LoginForm = () => {
           </Form>
         )}
       </Formik>
-      <div className="text-center mt-3 text-xl px-20 flex flex-col gap-4">
+      {/* <div className="text-center mt-3 text-xl px-20 flex flex-col gap-4">
         Or sign in with
         <div
           className="cursor-pointer bg-pinkpastel text-white py-1 border flex items-center justify-center gap-2 hover:opacity-75 rounded"
@@ -106,7 +107,7 @@ const LoginForm = () => {
           </svg>
           <p className="text-gray text-lg">Sign in with Google</p>
         </div>
-      </div>
+      </div> */}
       <div className="flex justify-center mt-2 gap-1 mb-5">
         <p className="opacity-50">Dont have account?</p>
         <Link href="/register" className="hover:opacity-75">

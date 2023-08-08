@@ -22,7 +22,7 @@ const Search = () => {
       keyword.length >= 3 &&
       dataAfterSearch.length > 0
     ) {
-      nextRouter.push(`/search/${keyword}`);
+      nextRouter.push(`/search/${keyword}/1`);
       setKeyword("");
     } else {
       return false;
@@ -45,7 +45,7 @@ const Search = () => {
       if (keyword.length >= 3) {
         try {
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_ANIME_API}/${keyword}`
+            `${process.env.NEXT_PUBLIC_ANIME_API}/${keyword}?page=1`
           );
           const data = await res.json();
           setDataAfterSearch(data.results);
@@ -66,14 +66,14 @@ const Search = () => {
           value={keyword}
           type="text"
           placeholder="Search anime (Must be more than 3 characters)"
-          className="w-full"
+          className="w-full dark:text-lightWhite dark:placeholder-lightWhite"
           onChange={handleKeyChange}
           onKeyDown={HandleEnterPress}
           onBlur={handleBlur}
           onFocus={handleFocus}
         />
         <div className="absolute top-2 right-0">
-          {loading === true && keyword.length > 0 && (
+          {loading === true && keyword.length >0 && (
             <ReactLoading type="spin" height={25} width={25} color="#87CEEB" />
           )}
         </div>

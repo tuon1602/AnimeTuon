@@ -6,7 +6,6 @@ import { PrismaClient } from "@prisma/client";
 const bcrypt = require("bcrypt");
 const prisma = new PrismaClient();
 
-
 export const options: NextAuthOptions = {
   providers: [
     GitHubProvider({
@@ -20,7 +19,9 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       id: "credentials",
       name: "Credentials",
-      async authorize(credentials:Record<string,string>|undefined):Promise<any> {
+      async authorize(
+        credentials: Record<string, string> | undefined
+      ): Promise<any> {
         try {
           console.log(credentials);
           const user = await prisma.user.findUnique({
@@ -36,15 +37,16 @@ export const options: NextAuthOptions = {
               return {
                 email: user.email,
                 name: user.username,
+                image:user.avatar,
               };
             } else {
-                throw new Error("Wrong Email or Password")
+              throw new Error("Wrong Email or Password");
             }
           } else {
-            throw new Error("Wrong Email or Password")
+            throw new Error("Wrong Email or Password");
           }
         } catch (error) {
-            throw new Error("Wrong Email or Password")
+          throw new Error("Wrong Email or Password");
         }
       },
     }),
@@ -52,4 +54,7 @@ export const options: NextAuthOptions = {
   pages: {
     error: "/login",
   },
+  session:{
+    maxAge: 1800
+  }
 };

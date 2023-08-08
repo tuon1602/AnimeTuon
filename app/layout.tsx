@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProviders>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="bg-lightgreen scroll-smooth">
+            <div className="bg-lightgreen scroll-smooth dark:bg-gray">
               <div className="w-full relative flex flex-col justify-between max-w-[1335px] m-auto">
                 <div className="mt-24 w-full">
                   <Header />

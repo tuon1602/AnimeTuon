@@ -14,12 +14,13 @@ interface CommentProps {
   animeChapterId?: string;
 }
 interface CommentItem {
-    user: {
-      username: string;
-    };
-    date: string;
-    content: string;
-  }
+  user: {
+    username: string;
+  };
+  date: string;
+  content: string;
+  starValue: number;
+}
 
 const CommentSchema = Yup.object().shape({
   content: Yup.string()
@@ -29,7 +30,9 @@ const CommentSchema = Yup.object().shape({
 
 const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
   const [commentData, setCommentData] = useState<CommentItem[]>([]);
-  const [commentDataByChapterId, setCommentDataByChapterId] = useState<CommentItem[]>([]);
+  const [commentDataByChapterId, setCommentDataByChapterId] = useState<
+    CommentItem[]
+  >([]);
   const session = useSession();
   const [starValue, setStarValue] = useState(0);
   const handleRatingChange = (value: any) => {
@@ -39,10 +42,10 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
   const getCommentData = async () => {
     try {
       if (animeChapterId && animeId) {
-        const res = await fetch(`/api/comment?chapterId=${animeChapterId}`,);
+        const res = await fetch(`/api/comment?chapterId=${animeChapterId}`);
         const data = await res.json();
         setCommentDataByChapterId(data.commentData);
-      } else if(!animeChapterId && animeId){
+      } else if (!animeChapterId && animeId) {
         const res = await fetch(`/api/comment?animeId=${animeId}`);
         const data = await res.json();
         setCommentData(
@@ -55,7 +58,6 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
       console.error(error);
     }
   };
-
 
   const sendData = async (values: any, { resetForm }: any) => {
     try {
@@ -77,7 +79,7 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
       if (returnData.status === 200) {
         toast.success("Nice comment!");
         resetForm();
-        getCommentData()
+        getCommentData();
       } else {
         toast.error("Comment failed!");
         resetForm();
@@ -88,8 +90,7 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
   };
   useEffect(() => {
     getCommentData();
-  },[animeId,animeChapterId]);
-  console.log(commentData)
+  }, [animeId, animeChapterId]);
   return (
     <div className="shadow-lg w-full min-h-[10vh] mt-10">
       <ToastContainer />
@@ -114,7 +115,6 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
                 //     })
                 // }
                 sendData(values, actions);
-
               }}
             >
               {({ errors, touched }) => (
@@ -204,17 +204,32 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
             </h1>
           )}
 
-          {commentData && commentData?.map((item, index) => (
-            <div className="w-1/2 mt-2" key={index}>
-              <div className="flex justify-between">
-                <p className="font-bold text-xl mb-2">{item.user.username}</p>
-                <p>{moment(item.date).format("MMMM Do, YYYY")}</p>
-              </div>
+          {commentData &&
+            commentData?.map((item, index) => (
+              <div className="w-1/2 mt-2" key={index}>
+                <div className="flex flex-col mb-2">
+                  <div className="flex justify-between">
+                      <p className="font-bold text-xl mb-2">
+                        {item.user.username}
+                      </p>
+                
+                    <p>{moment(item.date).format("MMMM Do, YYYY")}</p>
+                  </div>
+                  <div>
+                    {item.starValue ? (
+                      <Rate defaultValue={item.starValue} disabled />
+                    ) : null}
+                  </div>
+                </div>
 
-              <textarea rows={4} className="w-full border rounded p-2" disabled value={item.content}>
-              </textarea>
-            </div>
-          ))}
+                <textarea
+                  rows={4}
+                  className="w-full border bg-lightgreen rounded p-2"
+                  disabled
+                  value={item.content}
+                ></textarea>
+              </div>
+            ))}
           {commentDataByChapterId &&
             commentDataByChapterId.map((item, index) => (
               <div className="w-1/2 mt-2 " key={index}>
@@ -228,8 +243,7 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
                   className="w-full border rounded p-2"
                   disabled
                   value={item.content}
-                >
-                </textarea>
+                ></textarea>
               </div>
             ))}
         </div>

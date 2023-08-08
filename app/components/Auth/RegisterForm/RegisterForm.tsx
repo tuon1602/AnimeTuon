@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import React, { use } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Github } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,8 +35,9 @@ const RegisterForm = () => {
           username: "",
         }}
         validationSchema={SignupSchema}
-        onSubmit={async (values) => {
+        onSubmit={async (values,{setSubmitting}) => {
           // same shape as initial values
+          setSubmitting(false)
           try {
             const res = await fetch("/api/user", {
               method: "POST",
@@ -48,7 +49,7 @@ const RegisterForm = () => {
             const data = await res.json();
             if (data.status === 200) {
               toast.success("Create Successfull, Redirecting to login page...");
-              setInterval(() => {
+              setTimeout(() => {
                 router.push("/login");
               }, 3000);
             }

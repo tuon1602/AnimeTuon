@@ -38,7 +38,9 @@ module.exports = {
       "lightgreen":"#EEF6F0",
       // "lightpink":"#F5E6DB"
       "lightyellow":"#FFFAD1",
-      "warning":"#F08080"
+      "warning":"#F08080",
+      "lightWhite":"#FAF9F6"
+      
       
     }
   },
