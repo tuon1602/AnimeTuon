@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Link from "next/link";
 import { User } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -15,10 +15,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
+import useStore from "@/store";
 
 const LoginComPonent = () => {
+  const setUserEmail = useStore((state:any)=>state.setUserEmail)
+  const avatarData = useStore((state:any)=>state.avatarData)
+  const fetchAvatarData = useStore((state:any)=>state.fetchAvatarData)
   const session = useSession();
   const router = useRouter();
+  useEffect(()=>{
+    setUserEmail(session?.data?.user?.email)
+  },[session?.data?.user?.email])
+  useEffect(()=>{
+    fetchAvatarData()
+  },[avatarData])
   return (
     <div>
       {session.status === "authenticated" ? (
@@ -26,7 +36,7 @@ const LoginComPonent = () => {
           <DropdownMenuTrigger className="flex items-center">
             {session?.data?.user?.image && (
               <Avatar>
-                <AvatarImage src={session.data?.user?.image} />
+                <AvatarImage src={avatarData} />
                 {/* <AvatarFallback>CN</AvatarFallback> */}
               </Avatar>
             )}
@@ -40,6 +50,8 @@ const LoginComPonent = () => {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={()=>router.push('/profile')} className="cursor-pointer">Profile</DropdownMenuItem>
+            
+             {/* <DropdownMenuItem><Link href="/profile">Profile</Link></DropdownMenuItem> */}
             <DropdownMenuItem
               onClick={() => signOut()}
               className="cursor-pointer"

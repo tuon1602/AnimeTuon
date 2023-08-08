@@ -6,6 +6,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import InputAvatarButton from "../components/buttons/InputAvatarButton";
+import AnimeProfileCards from "../components/profile/AnimeProfileCards";
+
 
 async function getUserDetail() {
   const session = await getServerSession(options);
@@ -39,6 +41,10 @@ const ProfilePage = async () => {
           <InputAvatarButton avatarUrl={userDetail?.data?.avatar} userEmail={userDetail?.data?.email}/>
         </div>
         <p>We hope u hav an good anime experience here! :b</p>
+        <div className="mt-5 items-center flex flex-col gap-5">
+          <p className="text-4xl font-bold">Your favorite Animes!</p>
+          <AnimeProfileCards userEmail={userDetail?.data?.email}/>
+        </div>
       </div>
     </div>
   );

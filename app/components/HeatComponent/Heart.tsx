@@ -5,6 +5,7 @@ import { HeartSwitch } from "@anatoliygatt/heart-switch";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { Heart } from "lucide-react";
+import { useSWRConfig } from "swr";
 
 interface HeartIF {
   animeId: string;
@@ -15,58 +16,64 @@ interface HeartIF {
 const HeartFunc: React.FC<HeartIF> = ({ animeId, animeUrl, animeName }) => {
   const session = useSession();
   const userEmail = session.data?.user?.email;
-  //   console.log(likeId);
-  const [checked, setChecked] = useState(false);
+  const {mutate} = useSWRConfig()
 
-  const fetcher = (...args) => fetch(...args).then(res => res.json())
-  const {data} = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/like?animeId=${animeId}&userEmail=${userEmail}`,fetcher)
-//   const getLikeDetail = async () => {
-//     try {
-//       const res = await fetch(
-//         `${process.env.NEXT_PUBLIC_API_URL}/like?animeId=${animeId}&userEmail=${userEmail}`
-//       );
-//       const data = await res.json();
-//       setLikeData(data.like)
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/like?animeId=${animeId}&userEmail=${userEmail}`,
+    fetcher
+  );
+  //   const getLikeDetail = async () => {
+  //     try {
+  //       const res = await fetch(
+  //         `${process.env.NEXT_PUBLIC_API_URL}/like?animeId=${animeId}&userEmail=${userEmail}`
+  //       );
+  //       const data = await res.json();
+  //       setLikeData(data.like)
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
   const handleLikeChecked = async () => {
-    setChecked(!checked); 
     try {
-      if (!checked && data.like === null) {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/like`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ animeId, animeName, animeUrl, userEmail }),
-        });
-        const data = await res.json();
-        console.log(data);
-      } else if (checked && data.like!==null) {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/like`, {
-          method: "DELETE",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ id: data.like.id }),
-        });
-      }
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/like`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ animeId, animeName, animeUrl, userEmail }),
+      });
+      const likeData = await res.json();
+      console.log(likeData);
+      mutate(`${process.env.NEXT_PUBLIC_API_URL}/like?animeId=${animeId}&userEmail=${userEmail}`)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleLikeDeleted = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/like`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ id: data?.like.id }),
+      });
+      const deleteLikeData = await res.json();
+      console.log(deleteLikeData);
+      mutate(`${process.env.NEXT_PUBLIC_API_URL}/like?animeId=${animeId}&userEmail=${userEmail}`)
+
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    console.log(checked)
-  }, [checked]);
-  console.log(data)
-//   useEffect(() => {
-//     console.log("Updated checked state:", checked); // Log the updated checked state
-//   }, [checked]);
+  // console.log(data);
+  //   useEffect(() => {
+  //     console.log("Updated checked state:", checked); // Log the updated checked state
+  //   }, [checked]);
   return (
     <div>
-      {session.status==="authenticated" && checked === true? (
+      {/* {session.status==="authenticated" && checked === true? (
         <div className="flex gap-2">
           <Heart
             className="text-warning transition-all duration-200 ease-in-out"
@@ -84,6 +91,33 @@ const HeartFunc: React.FC<HeartIF> = ({ animeId, animeUrl, animeName }) => {
           />
           <p className="transition-all duration-200 ease-in-out">
             Save this to your favorite anime!
+          </p>
+        </div>
+      )} */}
+      {session.status === "authenticated" && data?.like !== null && (
+        <div className="flex gap-2 cursor-pointer" onClick={handleLikeDeleted}>
+          <Heart className="text-warning transition-all duration-200 ease-in-out" />
+          <p className="transition-all duration-200 ease-in-out">
+            It's your favorite anime!
+          </p>
+        </div>
+      )}
+      {session.status === "authenticated" && data?.like === null && (
+        <div className="flex gap-2 cursor-pointer " onClick={handleLikeChecked}>
+          <Heart className="transition-all duration-200 ease-in-out" />
+          <p className="transition-all duration-200 ease-in-out">
+            Save this to your favorite anime!
+          </p>
+        </div>
+      )}
+      {session.status === "unauthenticated" && (
+        <div className="flex gap-2 cursor-pointer disabled">
+          <Heart
+            className="transition-all duration-200 ease-in-out"
+            onClick={handleLikeChecked}
+          />
+          <p className="transition-all duration-200 ease-in-out">
+            You must login to like anime!
           </p>
         </div>
       )}
