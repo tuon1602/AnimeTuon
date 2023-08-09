@@ -13,13 +13,12 @@ Welcome to my AnimeTuon project, :3 just watch animeeeee
 - Login using Oauth
 - Register
 - Anime list
-
-## Might update
 - Comment and Likes for each animes
 - Save liked animes
-- Responsive
 - Dark/Light mode
-- Pagination or infinte scroll
+
+## Might update
+- Responsive
 - Animation
 
 ## Technologies Used

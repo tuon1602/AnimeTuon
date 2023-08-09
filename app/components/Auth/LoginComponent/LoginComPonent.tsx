@@ -34,13 +34,13 @@ const LoginComPonent = () => {
       {session.status === "authenticated" ? (
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center">
-            {session?.data?.user?.image && (
+            {avatarData && (
               <Avatar>
                 <AvatarImage src={avatarData} />
                 {/* <AvatarFallback>CN</AvatarFallback> */}
               </Avatar>
             )}
-            {!session?.data?.user?.image && (
+            {!avatarData && (
               <User/>
             )}
           </DropdownMenuTrigger>

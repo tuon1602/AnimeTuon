@@ -16,6 +16,7 @@ interface CommentProps {
 interface CommentItem {
   user: {
     username: string;
+    avatar: string;
   };
   date: string;
   content: string;
@@ -95,9 +96,13 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
     <div className="shadow-lg w-full min-h-[10vh] mt-10">
       <ToastContainer />
       <div className="p-5">
-        <h1 className="tracking-wider text-2xl dark:text-darkwhite">Anime Discussion</h1>
+        <h1 className="tracking-wider text-2xl dark:text-darkwhite">
+          Anime Discussion
+        </h1>
         <div className="mt-2">
-          <p className="dark:text-darkwhite">Rate this anime and give it comment</p>
+          <p className="dark:text-darkwhite">
+            Rate this anime and give it comment
+          </p>
           {session?.status === "authenticated" ? (
             <Formik
               initialValues={{
@@ -211,11 +216,19 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
               <div className="w-1/2 mt-2" key={index}>
                 <div className="flex flex-col mb-2">
                   <div className="flex justify-between">
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={item.user.avatar}
+                        className="w-10 h-10 rounded-full"
+                      />
                       <p className="font-bold text-xl mb-2 dark:text-darkwhite">
                         {item.user.username}
                       </p>
-                
-                    <p className="dark:text-darkwhite">{moment(item.date).format("MMMM Do, YYYY")}</p>
+                    </div>
+
+                    <p className="dark:text-darkwhite">
+                      {moment(item.date).format("MMMM Do, YYYY")}
+                    </p>
                   </div>
                   <div>
                     {item.starValue ? (
@@ -236,8 +249,18 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
             commentDataByChapterId.map((item, index) => (
               <div className="w-1/2 mt-2 " key={index}>
                 <div className="flex justify-between">
-                  <p className="font-bold text-xl mb-2 dark:text-darkwhite">{item.user.username}</p>
-                  <p className="dark:text-darkwhite">{moment(item.date).format("MMMM Do, YYYY")}</p>
+                <div className="flex items-center gap-2">
+                      <img
+                        src={item.user.avatar}
+                        className="w-10 h-10 rounded-full"
+                      />
+                      <p className="font-bold text-xl mb-2 dark:text-darkwhite">
+                        {item.user.username}
+                      </p>
+                    </div>
+                  <p className="dark:text-darkwhite">
+                    {moment(item.date).format("MMMM Do, YYYY")}
+                  </p>
                 </div>
 
                 <textarea

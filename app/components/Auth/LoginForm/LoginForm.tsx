@@ -62,7 +62,7 @@ const LoginForm = () => {
               name="email"
               type="email"
               placeholder="Email"
-              className="border py-2 rounded px-2 placeholder:text-darkwhite dark:text-darkwhite"
+              className="border py-2 rounded px-2 dark:placeholder:text-darkwhite dark:text-darkwhite"
             />
             {errors.email && touched.email ? (
               <div className="text-warning text-sm">{errors.email}</div>
@@ -71,7 +71,7 @@ const LoginForm = () => {
               name="password"
               type="password"
               placeholder="Pasword"
-              className="border py-2 rounded px-2 placeholder:text-darkwhite dark:text-darkwhite"
+              className="border py-2 rounded px-2 dark:placeholder:text-darkwhite dark:text-darkwhite"
             />
             {errors.password && touched.password ? (
               <div className="text-warning text-sm">{errors.password}</div>
