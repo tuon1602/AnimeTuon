@@ -18,7 +18,11 @@ const HeartFunc: React.FC<HeartIF> = ({ animeId, animeUrl, animeName }) => {
   const userEmail = session.data?.user?.email;
   const {mutate} = useSWRConfig()
 
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = async (...args: Parameters<typeof fetch>): Promise<any> => {
+    const response = await fetch(...args);
+    const data = await response.json();
+    return data;
+  };
   const { data } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}/like?animeId=${animeId}&userEmail=${userEmail}`,
     fetcher
@@ -96,16 +100,16 @@ const HeartFunc: React.FC<HeartIF> = ({ animeId, animeUrl, animeName }) => {
       )} */}
       {session.status === "authenticated" && data?.like !== null && (
         <div className="flex gap-2 cursor-pointer" onClick={handleLikeDeleted}>
-          <Heart className="text-warning transition-all duration-200 ease-in-out" />
-          <p className="transition-all duration-200 ease-in-out">
+          <Heart className="text-warning transition-all duration-200 ease-in-out " />
+          <p className="transition-all duration-200 ease-in-out dark:text-darkwhite">
             It's your favorite anime!
           </p>
         </div>
       )}
       {session.status === "authenticated" && data?.like === null && (
         <div className="flex gap-2 cursor-pointer " onClick={handleLikeChecked}>
-          <Heart className="transition-all duration-200 ease-in-out" />
-          <p className="transition-all duration-200 ease-in-out">
+          <Heart className="transition-all duration-200 ease-in-out dark:text-darkwhite" />
+          <p className="transition-all duration-200 ease-in-out dark:text-darkwhite">
             Save this to your favorite anime!
           </p>
         </div>
@@ -113,10 +117,10 @@ const HeartFunc: React.FC<HeartIF> = ({ animeId, animeUrl, animeName }) => {
       {session.status === "unauthenticated" && (
         <div className="flex gap-2 cursor-pointer disabled">
           <Heart
-            className="transition-all duration-200 ease-in-out"
+            className="transition-all duration-200 ease-in-out dark:text-darkwhite"
             onClick={handleLikeChecked}
           />
-          <p className="transition-all duration-200 ease-in-out">
+          <p className="transition-all duration-200 ease-in-out dark:text-darkwhite">
             You must login to like anime!
           </p>
         </div>

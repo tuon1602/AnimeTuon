@@ -17,9 +17,9 @@ const DetailsButton = (props: DetailsName) => {
       <Badge variant="outline" className="bg-pinkpastel text-center ">
         {props.name}
       </Badge>
-      <p className="dark:text-lightWhite">{props.data}</p>
+      <p className="dark:text-darkwhite">{props.data}</p>
       {props.genres?.map((item,index)=>(
-        <Link href={`/category/${item}`} key={index} className="dark:text-lightWhite">{item}</Link>
+        <Link href={`/category/${item}`} key={index} className="dark:text-darkwhite">{item}</Link>
       ))}
       <div className="flex flex-wrap gap-2">
         {props.episode?.map((item: any, index: any) => (

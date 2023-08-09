@@ -67,7 +67,7 @@ const RegisterForm = () => {
               name="email"
               type="email"
               placeholder="Email"
-              className="border py-2 rounded px-2"
+              className="border py-2 rounded px-2 dark:text-darkwhite"
             />
             {errors.email && touched.email ? (
               <div className="text-warning text-sm">{errors.email}</div>
@@ -76,7 +76,7 @@ const RegisterForm = () => {
               name="username"
               type="text"
               placeholder="Username"
-              className="border py-2 rounded px-2"
+              className="border py-2 rounded px-2 dark:text-darkwhite"
             />
             {errors.username && touched.username ? (
               <div className="text-warning text-sm">{errors.username}</div>
@@ -85,7 +85,7 @@ const RegisterForm = () => {
               name="password"
               type="password"
               placeholder="Pasword"
-              className="border py-2 rounded px-2"
+              className="border py-2 rounded px-2 dark:text-darkwhite"
             />
             {errors.password && touched.password ? (
               <div className="text-warning text-sm">{errors.password}</div>
@@ -100,8 +100,8 @@ const RegisterForm = () => {
         )}
       </Formik>
       <div className="flex justify-center mt-2 gap-1 mb-5">
-        <p className="opacity-50">Already Register?</p>
-        <Link href="/login" className="hover:opacity-75">
+        <p className="opacity-50 dark:text-darkwhite dark:opacity-50">Already Register?</p>
+        <Link href="/login" className="hover:opacity-75 dark:text-darkwhite ">
           Login now
         </Link>
       </div>

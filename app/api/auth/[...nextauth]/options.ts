@@ -20,10 +20,10 @@ export const options: NextAuthOptions = {
       id: "credentials",
       name: "Credentials",
       async authorize(
-        credentials: Record<string, string> | undefined
-      ): Promise<any> {
+        credentials: Record<string, string> | null 
+      ): Promise<null | { email: string; name: string; image: string}> {
         try {
-          console.log(credentials);
+          // console.log(credentials);
           const user = await prisma.user.findUnique({
             where: { email: credentials.email },
           });

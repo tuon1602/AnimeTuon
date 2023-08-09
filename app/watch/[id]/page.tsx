@@ -53,8 +53,8 @@ const AnimeDetail = async ({ params }: { params: { id: string } }) => {
           />
         </div>
         <div className="">
-          <p className="tracking-wider text-xl dark:text-lightWhite">{dataAnimeDetail?.title}</p>
-          <p className="text-sm text-gray dark:text-lightWhite">{dataAnimeDetail?.otherName}</p>
+          <p className="tracking-wider text-xl dark:text-darkwhite">{dataAnimeDetail?.title}</p>
+          <p className="text-sm text-gray dark:text-darkwhite">{dataAnimeDetail?.otherName}</p>
           <div className="flex flex-col gap-2 mt-2 flex-wrap">
             <DetailsButton name="Category" genres={dataAnimeDetail?.genres} />
             <DetailsButton name="Released Date" data={dataAnimeDetail?.type} />
@@ -98,7 +98,7 @@ const AnimeDetail = async ({ params }: { params: { id: string } }) => {
         </div>
       </div>
       <div className="mt-8">
-        <p className="dark:text-lightWhite">Description: {dataAnimeDetail?.description}</p>
+        <p className="dark:text-darkwhite">Description: {dataAnimeDetail?.description}</p>
       </div>
       <div>
         <Comment animeId={params.id} />

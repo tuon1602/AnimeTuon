@@ -25,14 +25,17 @@ const Player = (props: PlayerProps) => {
           },
         }}
       /> */}
-      <div className="w-full h-[800px]">
+    
         <iframe
           src={`${props.playerURL? props.playerURL : props.defaultPlayerURL}`}
           allowFullScreen
           width="100%"
-          height="100%"
+          height="751px"
+          style={{
+            border: 'none',
+            objectFit: 'cover', // or 'contain', 'fill', etc.
+          }}
         ></iframe>
-      </div>
     </>
   );
 };

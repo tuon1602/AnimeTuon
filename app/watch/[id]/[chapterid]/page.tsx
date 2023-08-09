@@ -67,7 +67,7 @@ const ChapterId = () => {
       <div>
         <Link
           href={`/watch/${params.id}`}
-          className="flex justify-center mb-5 cursor-pointer text-2xl hover:opacity-80"
+          className="flex justify-center mb-5 cursor-pointer text-2xl hover:opacity-80 dark:text-darkwhite"
         >
           {titleData}
         </Link>
@@ -77,7 +77,7 @@ const ChapterId = () => {
           playerURL={serverURLState}
           defaultPlayerURL={firstServerURL}
         />
-        <p className="text-sm text-center mt-2">
+        <p className="text-sm text-center mt-2 dark:text-darkwhite">
           Please report when there is issues{" "}
           <Link className="text-blue" href="/Faq">
             Click Here
@@ -86,8 +86,8 @@ const ChapterId = () => {
       </div>
       <div className="flex flex-col items-center mt-5">
         <Card className="max-w-[400px]">
-          <CardHeader>Choose your server</CardHeader>
-          <CardDescription className="text-gray pl-6 mb-2">
+          <CardHeader className="dark:text-darkwhite">Choose your server</CardHeader>
+          <CardDescription className="text-gray pl-6 mb-2 dark:text-darkwhite">
             {`If your anime could not run, try some servers`}
           </CardDescription>
           <CardContent className="flex flex-wrap gap-2">
@@ -104,7 +104,7 @@ const ChapterId = () => {
           </CardContent>
         </Card>
         <Card className="mt-5 w-1/2 max-h-[500px] overflow-auto">
-          <CardHeader>Choose your chapter</CardHeader>
+          <CardHeader className="dark:text-darkwhite">Choose your chapter</CardHeader>
           <CardContent className="flex flex-wrap gap-2">
             {chapters?.map((item: any, index: any) => (
               <Link href={`/watch/${params.id}/${item.id}`} key={index}>

@@ -10,6 +10,8 @@
 [data-theme='dark'] {
   --background: black;
   --foreground: white;
+  
+
 }
 
 body{
@@ -35,6 +37,4 @@ body{
 .ant-pagination .ant-pagination-options{
   display: none !important;
 }
-
-
 

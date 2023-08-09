@@ -61,7 +61,7 @@ const TypeName = () => {
   }, []);
   return (
     <div className="min-h-[80vh]">
-      <p className="text-2xl text-center dark:text-lightWhite">{params.id.replace(/%20/g, " ")}</p>
+      <p className="text-2xl text-center dark:text-darkwhite">{params.id.replace(/%20/g, " ")}</p>
       <div className="mt-5">
         {/* {getAllData?.map((item:any,index:any)=>(
             <AnimeCards/>

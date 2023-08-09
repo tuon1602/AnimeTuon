@@ -66,7 +66,7 @@ const Search = () => {
           value={keyword}
           type="text"
           placeholder="Search anime (Must be more than 3 characters)"
-          className="w-full dark:text-lightWhite dark:placeholder-lightWhite"
+          className="w-full dark:text-darkwhite dark:placeholder-darkwhite"
           onChange={handleKeyChange}
           onKeyDown={HandleEnterPress}
           onBlur={handleBlur}

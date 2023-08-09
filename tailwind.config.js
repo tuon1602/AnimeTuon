@@ -33,13 +33,13 @@ module.exports = {
     },
     colors:{
       "pinkpastel":"#F5E6DB",
-      "gray":"#2b2839",
+      "gray":"#171717",
       "blue":"#87CEEB",
       "lightgreen":"#EEF6F0",
       // "lightpink":"#F5E6DB"
       "lightyellow":"#FFFAD1",
       "warning":"#F08080",
-      "lightWhite":"#FAF9F6"
+      "darkwhite":"#FFFFFF80"
       
       
     }

@@ -95,9 +95,9 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
     <div className="shadow-lg w-full min-h-[10vh] mt-10">
       <ToastContainer />
       <div className="p-5">
-        <h1 className="tracking-wider text-2xl">Anime Discussion</h1>
+        <h1 className="tracking-wider text-2xl dark:text-darkwhite">Anime Discussion</h1>
         <div className="mt-2">
-          <p>Rate this anime and give it comment</p>
+          <p className="dark:text-darkwhite">Rate this anime and give it comment</p>
           {session?.status === "authenticated" ? (
             <Formik
               initialValues={{
@@ -123,13 +123,14 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
                     allowClear
                     onChange={handleRatingChange}
                     defaultValue={starValue}
+                    className="dark:bg-lightgreen dark:bg-opacity-60 w-fit"
                   />
                   <Field
                     name="content"
                     as="textarea"
                     rows={4}
                     placeholder="Your content here"
-                    className="border py-2 rounded px-2 bg-transparent"
+                    className="border py-2 rounded px-2 bg-transparent dark:bg-lightgreen"
                   />
                   {errors.content && touched.content ? (
                     <div className="text-warning text-sm">{errors.content}</div>
@@ -169,13 +170,14 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
                     onChange={handleRatingChange}
                     defaultValue={starValue}
                     disabled
+                    className="dark:bg-lightgreen dark:bg-opacity-60 w-fit"
                   />
                   <Field
                     name="content"
                     as="textarea"
                     rows={4}
                     placeholder="You must login to comment"
-                    className="border py-2 rounded px-2 bg-transparent"
+                    className="border py-2 rounded px-2 bg-transparent dark:bg-lightgreen"
                     disabled
                   />
                   {errors.content && touched.content ? (
@@ -195,11 +197,11 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
         </div>
         <div className="mt-5">
           {animeChapterId ? (
-            <h1 className="text-2xl tracking-wider">
+            <h1 className="text-2xl tracking-wider dark:text-darkwhite">
               All Comments ({commentDataByChapterId.length})
             </h1>
           ) : (
-            <h1 className="text-2xl tracking-wider">
+            <h1 className="text-2xl tracking-wider dark:text-darkwhite">
               All Comments ({commentData.length})
             </h1>
           )}
@@ -209,11 +211,11 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
               <div className="w-1/2 mt-2" key={index}>
                 <div className="flex flex-col mb-2">
                   <div className="flex justify-between">
-                      <p className="font-bold text-xl mb-2">
+                      <p className="font-bold text-xl mb-2 dark:text-darkwhite">
                         {item.user.username}
                       </p>
                 
-                    <p>{moment(item.date).format("MMMM Do, YYYY")}</p>
+                    <p className="dark:text-darkwhite">{moment(item.date).format("MMMM Do, YYYY")}</p>
                   </div>
                   <div>
                     {item.starValue ? (
@@ -234,13 +236,13 @@ const Comment: React.FC<CommentProps> = ({ animeId, animeChapterId }) => {
             commentDataByChapterId.map((item, index) => (
               <div className="w-1/2 mt-2 " key={index}>
                 <div className="flex justify-between">
-                  <p className="font-bold text-xl mb-2">{item.user.username}</p>
-                  <p>{moment(item.date).format("MMMM Do, YYYY")}</p>
+                  <p className="font-bold text-xl mb-2 dark:text-darkwhite">{item.user.username}</p>
+                  <p className="dark:text-darkwhite">{moment(item.date).format("MMMM Do, YYYY")}</p>
                 </div>
 
                 <textarea
                   rows={4}
-                  className="w-full border rounded p-2"
+                  className="w-full border rounded p-2 bg-lightgreen"
                   disabled
                   value={item.content}
                 ></textarea>

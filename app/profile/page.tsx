@@ -34,15 +34,15 @@ const ProfilePage = async () => {
   return (
     <div className="min-h-[80vh]">
       <div className="flex flex-col justify-center items-center gap-2">
-        <h1 className="text-4xl">
-          <span className="opacity-50">Hello</span> {session?.user?.name}
+        <h1 className="text-4xl dark:text-darkwhite">
+          <span className="opacity-50 dark:text-darkwhite">Hello</span> {session?.user?.name}
         </h1>
         <div>
           <InputAvatarButton avatarUrl={userDetail?.data?.avatar} userEmail={userDetail?.data?.email}/>
         </div>
-        <p>We hope u hav an good anime experience here! :b</p>
+        <p className="dark:text-darkwhite">We hope u hav an good anime experience here! :b</p>
         <div className="mt-5 items-center flex flex-col gap-5">
-          <p className="text-4xl font-bold">Your favorite Animes!</p>
+          <p className="text-4xl font-bold dark:text-darkwhite">Your favorite Animes!</p>
           <AnimeProfileCards userEmail={userDetail?.data?.email}/>
         </div>
       </div>

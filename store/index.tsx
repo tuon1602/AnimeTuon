@@ -8,7 +8,7 @@ const useStore = create((set) => ({
   setUserEmail:(state:string)=>set({userEmail:state}),
   fetchAvatarData:async()=>{
     try{
-      const store  =useStore.getState()
+      const store:any  =useStore.getState()
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user?email=${store.userEmail}`)
       const resData = await res.json()
       set({avatarData:resData?.data?.avatar})
